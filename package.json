@@ -1,0 +1,15 @@
+{
+  "name": "js-basics-project",
+  "version": "1.0.0",
+  "description": "\"Sample project for the JS basics training course\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "static src --port 8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-static": "^0.7.11"
+  }
+}
