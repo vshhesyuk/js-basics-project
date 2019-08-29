@@ -15,13 +15,15 @@
     <div class="container">
         <div>
             <button class="navbar-toggler d-none d-md-inline-flex d-inline-flex d-lg-none">
-                <img src="https://iliakan.github.io/course-project/assets/icons/icon-menu.svg" alt="menu icon">
+                <img src="assets/icons/icon-menu.svg" alt="menu icon">
             </button>
 
             <a class="navbar-brand" href="#"><strong>AnyShop</strong></a>
         </div>
 
-        <a href="#" class="d-none d-md-inline-flex d-inline-flex d-lg-none mobile-search-menu-icon"><img src="https://iliakan.github.io/course-project/assets/icons/icon-search.svg" alt="menu icon"></a>
+        <a href="#" class="d-none d-md-inline-flex d-inline-flex d-lg-none mobile-search-menu-icon">
+            <img src="assets/icons/icon-search.svg" alt="menu icon">
+        </a>
 
         <div class="collapse navbar-collapse" id="navbarsExample07">
             <ul class="navbar-nav mr-auto">
