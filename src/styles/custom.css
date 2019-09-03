@@ -71,6 +71,22 @@ body.no-scroll {
     font-size: .875rem;
 }
 
+.project-link:after {
+    content: '|';
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.project-link:last-child:after {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .project-link:after {
+        display: none;
+    }
+}
+
 .footer-inner {
     display: flex;
     flex-direction: column;
