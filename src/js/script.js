@@ -25,6 +25,9 @@ function run() {
         }
     ];
     const footer = new Footer(footerWrapper, footerLinks);
+
+    const productListWrapper = document.querySelector('.product-list');
+    const productList = new ProductList(productListWrapper);
 }
 
 run();
