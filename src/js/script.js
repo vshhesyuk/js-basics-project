@@ -28,6 +28,9 @@ function run() {
 
     const productListWrapper = document.querySelector('.product-list');
     const productList = new ProductList(productListWrapper);
+
+    const menuWrapper = document.querySelector('.main-menu');
+    const menu = new Menu(menuWrapper);
 }
 
 run();
