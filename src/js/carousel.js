@@ -77,28 +77,6 @@ const nextActiveIndicator = this.element.querySelector(`*[data-slide-to="${id}"]
 'use strict';
 
 class Carousel {
-    template = `
-    <div id="mainCarousel" class="main-carousel carousel slide">
-        <ol class="carousel-indicators">
-            <li data-target="#mainCarousel" data-slide-to="0" class="carousel-indicator"></li>
-            <li data-target="#mainCarousel" data-slide-to="1" class="carousel-indicator"></li>
-            <li data-target="#mainCarousel" data-slide-to="2" class="carousel-indicator"></li>
-        </ol>
-        <div class="carousel-inner">
-            <!--Вот здесь будет активный слайд-->
-        </div>
-        
-        <button class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </button>
-        <button class="carousel-control-next" href="#mainCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </button>
-    </div>
-    `
-
     slides = [
         {
             id: 0,
@@ -115,110 +93,6 @@ class Carousel {
     ]
 
     constructor(element) {
-        this.render(element);
-    }
-
-    render(element) {
-        this.element = element;
-        element.innerHTML = this.template;
-        this.slideWrapper = element.querySelector('.carousel-inner');
-        const [firstSlide] = this.slides;
-        
-        this.goToSlide(firstSlide);
-
-        const nextButton = element.querySelector('.carousel-control-next');
-        const previousButton = element.querySelector('.carousel-control-prev');
-        const indicators = element.querySelector('.carousel-indicators');
-
-        nextButton.addEventListener('click', () => this.next());
-        previousButton.addEventListener('click', () => this.previous());
-        indicators.addEventListener('click', (event) => this.onIndicatorClick(event));
-    }
-
-    generateSlide(slide) {
-        return `
-        <div class="carousel-item active">
-            <img src="assets/images/default-slide-img.jpg" alt="Activelide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3 class="h1">${slide.title}</h3>
-                    <div>
-                        <a class="btn" href="#" role="button">
-                            View all DEALS
-                            <img src="assets/icons/icon-angle-white.svg" class="ml-3" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        `;
-    }
-
-    next() {
-        const slidesAmount = this.slides.length;
-        const activeSlideIndex = this.slides.findIndex((slide) => slide.id === this.activeSlide.id);
-
-        const isNextSlideTheLast = activeSlideIndex === slidesAmount - 1;
-        
-        if (isNextSlideTheLast) {
-            const nextSlideIndex = 0;
-            const nextActiveSlide = this.slides[nextSlideIndex];
-            this.goToSlide(nextActiveSlide);
-            return;
-        }
-
-        const nextSlideIndex = activeSlideIndex + 1;
-        const nextActiveSlide = this.slides[nextSlideIndex];
-        this.goToSlide(nextActiveSlide);
-    }
-
-    previous() {
-        const slidesAmount = this.slides.length;
-        const activeSlideIndex = this.slides.findIndex((slide) => slide.id === this.activeSlide.id);
-
-        const isPreviousSlideTheFirst = activeSlideIndex === 0;
-        
-        if (isPreviousSlideTheFirst) {
-            const previousSlideIndex = slidesAmount - 1;
-            const previousActiveSlide = this.slides[previousSlideIndex];
-            this.goToSlide(previousActiveSlide);
-            return;
-        }
-
-        const previousSlideIndex = activeSlideIndex - 1;
-        const previousActiveSlide = this.slides[previousSlideIndex];
-        this.goToSlide(previousActiveSlide);
-    }
-
-    onIndicatorClick(event) {
-        const target = event.target;
-        const isClickOnIndicator = target.dataset.target === '#mainCarousel';
-
-        if (!isClickOnIndicator) {
-            return;
-        }
-        
-        const slideToIndex = target.dataset.slideTo;
-        const nextActiveSlide = this.slides[slideToIndex];
-
-        this.goToSlide(nextActiveSlide);
-    }
-
-    goToSlide(nextActiveSlide) {
-        this.activeSlide = nextActiveSlide;
-
-        const nextActiveIndicator = this.element.querySelector(`*[data-slide-to="${nextActiveSlide.id}"]`);
-        
-        if (this.activeIndicator) {
-            this.activeIndicator.classList.remove('active');
-        }
-        
-        nextActiveIndicator.classList.add('active');
-
-        this.activeIndicator = nextActiveIndicator;
-
-        const nextActiveSlideHTML = this.generateSlide(nextActiveSlide);
-        this.slideWrapper.innerHTML = nextActiveSlideHTML;
     }
 }
 
