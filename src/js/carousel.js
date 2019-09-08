@@ -33,7 +33,7 @@
     <img src="assets/images/default-slide-img.jpg" alt="Activelide">
     <div class="container">
         <div class="carousel-caption">
-            <h3 class="h1">${slide.title}</h3>
+            <h3 class="h1">BEST LAPTOP DEALS</h3>
             <div>
                 <a class="btn" href="#" role="button">
                     View all DEALS
