@@ -107,10 +107,104 @@ const product = {
 'use strict';
 
 class ProductList {
+    layout = 
+    `<div class="row justify-content-end">
+        <div class="col-lg-9">
+            <h3 class="section-title">Top Recommendations for You</h3>
+            <div class="row homepage-cards">
+                <!--ВОТ ЗДЕСЬ БУДУТ КАРТОЧКИ ТОВАРОВ-->
+            </div>
+        </div>
+    </div>`;
+
     constructor(element){
-        // ВАШ КОД
+        fetch('data/products.json')
+            .then(response => response.json())
+            .then((products) => this.render(element, products));
+    }
+
+    render(element, products) {
+        element.innerHTML = this.layout;
+        const cards = document.querySelector('.homepage-cards');
+        let allCards = '';
+
+        products.forEach((element) => {
+            const imgUrl = element.imageUrl;
+            const title = element.title;
+            const price = element.price;
+            const oldPrice = element.oldPrice;
+
+            let ratingStars = 0;
+            let reviewsAmount = 0;
+
+            if (element.rating !== null) {
+                ratingStars = element.rating.stars;
+                reviewsAmount = element.rating.reviewsAmount;
+            }
+
+            const allStars = this.generateStars(ratingStars);
+            const priceLayout = this.generatePrice(price, oldPrice);
+
+            // Заполняем карту товара
+            allCards += 
+            `<div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-img-wrap">
+                        <img class="card-img-top" src="${imgUrl}" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${title}</h5>
+                        <div class="rate">
+                            ${allStars}
+                            <span class="rate-amount ml-2">${reviewsAmount}</span>
+                        </div>
+                        ${priceLayout}
+                    </div>
+                </div>
+            </div>`;
+
+        });
+
+        cards.insertAdjacentHTML('beforeend', allCards);
+    }
+
+    generatePrice(price, oldPrice) {
+        let priceLayout = '';
+
+        if (oldPrice !== null) {
+            priceLayout = 
+            `<p class="card-text price-text discount">
+                <strong>${price}</strong>
+                <small class="ml-2">${oldPrice}</small>
+            </p>`;
+        } else {
+            priceLayout = 
+            `<p class="card-text price-text">
+                <strong>${price}</strong>
+            </p>`;
+        }
+
+        return priceLayout;
+    }
+
+    generateStars(ratingStars) {
+        let starElement = `<i class="icon-star active"></i>`;
+        let starCheckedElement = `<i class="icon-star checked"></i>`;
+        let allStars = '';
+
+        for (let i = 0; i < 5; i++) {
+            if (ratingStars === 0) {
+                allStars += starElement;
+            } else {
+                ratingStars -= 1;
+                allStars += starCheckedElement;
+            }
+        }
+        return allStars;
     }
 }
+
+
 
 // Делает класс доступным глобально, сделано для упрощения, чтобы можно было его вызывать из другого скрипта
 window.ProductList = ProductList;
